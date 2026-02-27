@@ -12,14 +12,16 @@ import { cn } from "@/lib/utils";
 
 export default function SettingsPage() {
     const { user, logout, loading } = useAuth();
-    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
     const router = useRouter();
+    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
-    if (loading) return null;
-    if (!user) {
-        router.push("/login");
-        return null;
-    }
+    React.useEffect(() => {
+        if (!loading && !user) {
+            router.push("/login");
+        }
+    }, [user, loading, router]);
+
+    if (loading || !user) return null;
 
     return (
         <div className="container mx-auto max-w-2xl px-4 py-12">

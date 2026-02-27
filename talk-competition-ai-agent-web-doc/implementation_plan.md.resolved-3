@@ -1,0 +1,39 @@
+# i18n and Translation Fixes for FinanceAI Web
+
+Resolve issues with language switching, translation persistence, and inconsistent i18n instance usage in the Finance Management web application.
+
+## User Review Required
+
+> [!IMPORTANT]
+> This fix will clear the current language state and default to English or the user's browser language. Users will need to set their preference again, which will then be persisted in LocalStorage.
+
+## Proposed Changes
+
+### i18n Configuration
+
+#### [MODIFY] [i18n.ts](file:///d:/AI%20Agent%20Projects/Android%20Release/finance-management-ai-agent-web/i18n/i18n.ts)
+- Integrate `i18next-browser-languagedetector` for automatic language detection and persistence.
+- Remove hardcoded `lng: 'en'`.
+- Ensure standard singleton export for the entire app.
+
+### Authentication & Context
+
+#### [MODIFY] [AuthContext.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/finance-management-ai-agent-web/context/AuthContext.tsx)
+- Refactor `I18nextProvider` usage to be more robust.
+- Ensure `i18n` instance is correctly initialized before rendering children.
+
+### Core Screens
+
+#### [MODIFY] [ProfilePage.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/finance-management-ai-agent-web/app/profile/page.tsx)
+- Use the `i18n` object from `useTranslation()` instead of direct module import for language switching.
+- This ensures React re-renders all components when the language changes.
+
+## Verification Plan
+
+### Automated Tests
+- Build verification with `npm run build`.
+
+### Manual Verification
+- **Language Switching**: Change language on the Profile page and verify that Sidebar, Dashboard, and Transactions labels update immediately.
+- **Persistence**: Change language, refresh the page, and verify that the language preference is maintained.
+- **Initial Detection**: Open the app in a new session and verify it defaults to the system/browser language (if supported) or the fallback (English).

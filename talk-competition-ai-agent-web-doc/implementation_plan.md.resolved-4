@@ -1,0 +1,28 @@
+# Fix Missing Facebook Login in Web App
+
+The goal is to implement Facebook authentication in the web application (`talk-competition-ai-agent-web`), matching the functionality available in the mobile application.
+
+## Proposed Changes
+
+### [Component Name] Authentication Logic and UI
+
+I will add Facebook login support to the authentication flow by integrating `FacebookAuthProvider` from Firebase.
+
+#### [MODIFY] [page.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/login/page.tsx)
+- Import `FacebookAuthProvider` from `firebase/auth`.
+- Implement [handleFacebookLogin](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/LoginScreen.tsx#77-94) using `signInWithPopup`.
+- Add a "Facebook" login button with appropriate styling and icon.
+
+#### [MODIFY] [page.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/signup/page.tsx)
+- Add Facebook login button to the signup page to allow quick account creation.
+
+## Verification Plan
+
+### Manual Verification
+- Since I cannot easily verify the actual Facebook login flow (as it requires a browser and a real Facebook account or a test account), I will:
+    1. Verify that the login buttons appear correctly on both the Login and Signup pages.
+    2. Check that the [handleFacebookLogin](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/LoginScreen.tsx#77-94) function is correctly called when the button is clicked by adding a temporary console log or using the browser tool to inspect the button element.
+    3. Ensure no linting errors are introduced.
+
+> [!NOTE]
+> The actual login flow depends on the Firebase project configuration in the Facebook Developer Console, which is assumed to be correctly set up given it works on mobile.

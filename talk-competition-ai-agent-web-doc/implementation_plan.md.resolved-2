@@ -1,0 +1,55 @@
+# Conversion of AI Talk Show App to Next.js
+
+Convert the React Native application `talk-competition-ai-agent-mobile` to a Next.js web application `talk-competition-ai-agent-web`.
+
+## Proposed Changes
+
+### Project Initialization
+
+#### [NEW] [talk-competition-ai-agent-web](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web)
+- Initialize Next.js 15 project with Tailwind CSS 4.
+- Setup standard directory structure (app router).
+
+### Services and Logic
+
+#### [NEW] [firebase.ts](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/lib/firebase.ts)
+- Migrate Firebase initialization to Web SDK.
+- Support Auth, Firestore.
+
+#### [NEW] [ai.ts](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/lib/ai.ts)
+- Migrate Gemini API service using `@google/generative-ai`.
+
+### Components and Styling
+
+#### [NEW] [ui components](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/components/ui)
+- Create premium UI components (Button, Input, Card) using Vanilla CSS/Tailwind 4.
+- Implement responsive design.
+
+### Pages (Migrations from Screens)
+
+#### [NEW] [login page](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/login/page.tsx)
+- Port [LoginScreen.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/LoginScreen.tsx) logic and UI.
+
+#### [NEW] [signup page](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/signup/page.tsx)
+- Port [SignupScreen.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/SignupScreen.tsx).
+
+#### [NEW] [home page](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/page.tsx)
+- Port [InitiateConversationScreen.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/InitiateConversationScreen.tsx).
+
+#### [NEW] [active conversation](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/conversation/active/page.tsx)
+- Port [ActiveConversationScreen.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/ActiveConversationScreen.tsx).
+
+#### [NEW] [saved conversations](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-web/app/conversations/page.tsx)
+- Port [SavedConversationsScreen.tsx](file:///d:/AI%20Agent%20Projects/Android%20Release/talk-competition-ai-agent-mobile/src/screens/SavedConversationsScreen.tsx).
+
+## Verification Plan
+
+### Automated Tests
+- Run `npm run dev` and verify build status.
+- Add basic Vitest tests for the AI service logic if needed.
+
+### Manual Verification
+- **Auth Flow**: Register a new user, log in, log out.
+- **AI Conversation**: Start a topic, verify both AI agents (Humorous & Serious) respond.
+- **Persistence**: Verify conversations are saved to Firestore and retrievable.
+- **Responsive Design**: Test on different screen widths in the browser.

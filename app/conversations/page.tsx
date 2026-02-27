@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, query, where, getDocs, deleteDoc, doc, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -18,6 +19,13 @@ export default function ConversationsHistoryPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortOrder, setSortOrder] = useState<'Date DESC' | 'Date ASC' | 'Topic ASC' | 'Topic DESC'>('Date DESC');
     const { user, loading: authLoading } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && !user) {
+            router.push("/login");
+        }
+    }, [user, authLoading, router]);
 
     useEffect(() => {
         if (user) fetchConversations();
@@ -80,7 +88,7 @@ export default function ConversationsHistoryPage() {
         return result;
     };
 
-    if (authLoading || loading) {
+    if (authLoading || loading || !user) {
         return (
             <div className="flex min-h-[calc(100vh-64px)] items-center justify-center">
                 <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
